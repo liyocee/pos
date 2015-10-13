@@ -65,5 +65,27 @@ class User(AbstractBaseUser):
         full_name = '%s %s' % (self.first_name, self.last_name)
         return full_name.strip()
 
+    @property
+    def get_organization(self):
+        from pos.models import Organization, SalesAgent
+        try:
+            # first, fetch from organization
+            organization = Organization.objects.get(profile=self)
+            details = {
+                "id": organization.id,
+                "is_creator": True
+            }
+        except Organization.DoesNotExist:
+            # then, default to organizaiton's sales agent
+            try:
+                agent = SalesAgent.objects.get(profile=self)
+                details = {
+                    "id": agent.organization.id,
+                    "is_creator": False
+                }
+            except SalesAgent.DoesNotExist:
+                details = {}
+        return details
+
     class Meta:
         app_label = 'users'

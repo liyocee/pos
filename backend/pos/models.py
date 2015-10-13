@@ -15,7 +15,9 @@ class Organization(AbstractBase):
 @reversion.register
 class SalesAgent(AbstractBase):
     organization = models.ForeignKey(Organization)
-    profile = models.OneToOneField(settings.AUTH_USER_MODEL)
+    profile = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        related_name="sales_agent")
 
     class Meta:
         app_label = 'pos'
@@ -50,6 +52,7 @@ class Sales(AbstractBase):
     customer_address = models.TextField(
         null=True, blank=True)
     follow_up_date = models.DateTimeField(null=False, blank=False)
+    agent = models.ForeignKey(SalesAgent)
 
     class Meta:
         app_label = 'pos'

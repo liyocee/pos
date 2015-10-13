@@ -19,6 +19,12 @@ class SalesFilter(CommonFieldsFilterset):
     customer_phone = ListCharFilter(lookup_type='icontains')
     customer_email = ListCharFilter(lookup_type='icontains')
     customer_address = ListCharFilter(lookup_type='icontains')
+    agent = ListCharFilter(
+        name='agent__id', lookup_type='exact'
+    )
+    organization = ListCharFilter(
+        name='agent__organization__id', lookup_type='exact'
+    )
 
     class Meta(object):
         model = Sales

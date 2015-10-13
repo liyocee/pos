@@ -13,6 +13,8 @@ class UserSerializer(serializers.ModelSerializer):
     short_name = serializers.ReadOnlyField(source='get_short_name')
     full_name = serializers.ReadOnlyField(source='get_full_name')
     requires_password_change = serializers.ReadOnlyField()
+    organization = serializers.DictField(
+        read_only=True, source="get_organization")
 
     class Meta(object):
         model = User

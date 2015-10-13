@@ -60,9 +60,6 @@ class Migration(migrations.Migration):
                 ('customer_last_name', models.CharField(max_length=128)),
                 ('customer_address', models.TextField(null=True, blank=True)),
                 ('follow_up_date', models.DateTimeField()),
-                ('created_by', models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.PROTECT, default=common.models.get_default_system_user_id, to=settings.AUTH_USER_MODEL)),
-                ('product', models.ForeignKey(to='pos.ProductTypes')),
-                ('updated_by', models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.PROTECT, default=common.models.get_default_system_user_id, to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
@@ -75,9 +72,29 @@ class Migration(migrations.Migration):
                 ('deleted', models.BooleanField(default=False, help_text=b'Deletes should deactivate not do actual deletes')),
                 ('created_by', models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.PROTECT, default=common.models.get_default_system_user_id, to=settings.AUTH_USER_MODEL)),
                 ('organization', models.ForeignKey(to='pos.Organization')),
-                ('profile', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
+                ('profile', models.OneToOneField(related_name='sales_agent', to=settings.AUTH_USER_MODEL)),
                 ('updated_by', models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.PROTECT, default=common.models.get_default_system_user_id, to=settings.AUTH_USER_MODEL)),
             ],
+        ),
+        migrations.AddField(
+            model_name='sales',
+            name='agent',
+            field=models.ForeignKey(to='pos.SalesAgent'),
+        ),
+        migrations.AddField(
+            model_name='sales',
+            name='created_by',
+            field=models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.PROTECT, default=common.models.get_default_system_user_id, to=settings.AUTH_USER_MODEL),
+        ),
+        migrations.AddField(
+            model_name='sales',
+            name='product',
+            field=models.ForeignKey(to='pos.ProductTypes'),
+        ),
+        migrations.AddField(
+            model_name='sales',
+            name='updated_by',
+            field=models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.PROTECT, default=common.models.get_default_system_user_id, to=settings.AUTH_USER_MODEL),
         ),
         migrations.AlterUniqueTogether(
             name='producttypes',
