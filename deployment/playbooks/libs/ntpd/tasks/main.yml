@@ -1,0 +1,5 @@
+---
+- name: install ntpd
+  apt: name=ntp state=present
+  sudo: yes
+  tags: ntpd

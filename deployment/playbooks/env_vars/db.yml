@@ -1,0 +1,6 @@
+---
+
+# Database settings.
+db_user: _pos_user_
+db_name: _pos_db_
+db_password: _@_pos_@_passwd

@@ -1,0 +1,21 @@
+---
+
+git_repo: git@github.com:liyocee/pos.git
+git_repo_key_file: /home/ubuntu/.ssh/id_rsa
+
+project_name: pos
+application_name: pos_api
+
+
+# Git settings.
+setup_git_repo: yes
+git_branch: master
+
+# Application settings.
+virtualenv_path: "/opt/{{ application_name }}"
+application_path: "{{virtualenv_path}}/app"
+project_path: "{{ application_path }}/backend"
+application_log_dir: "{{ virtualenv_path }}/logs"
+application_log_file: "{{ application_log_dir }}/gunicorn_supervisor.log"
+requirements_file: "{{ project_path }}/requirements.txt"
+

@@ -1,0 +1,77 @@
+---
+
+- name: remove any existing installations # this is a crude way of killing the rat
+  file: state=absent name={{install_dir}}
+  sudo: yes
+  tags: pos_frontend
+
+
+- name: make installation directories
+  file: state=directory name={{item}} owner={{ansible_ssh_user}}
+  with_items:
+    - "{{install_dir}}"
+    - "{{download_dir}}"
+    - "{{extraction_dir}}"
+  sudo: yes
+  tags: pos_frontend
+
+- name: download pos frontend
+  copy: src={{ frontend_src_dir }}/{{frontend_archive_file}} dest={{download_dir}} owner={{ansible_ssh_user}} group={{gunicorn_group}} mode=u=rwx,g=rwx,o=r
+  sudo: yes
+  tags: pos_frontend
+
+
+- name: extract frontend
+  unarchive: >
+    copy=no
+    src="{{download_dir}}/{{frontend_archive_file}}"
+    dest="{{extraction_dir}}"
+  tags: pos_frontend
+
+
+- name: move frontend from bin folder
+  shell: "mv {{extraction_dir}}/{{archive_base_dir}}/* {{extraction_dir}}/"
+  tags: pos_frontend
+
+
+- name: update pos frontend settings
+  template: src=pos_frontend.settings.js dest={{extraction_dir}}/settings.js
+  tags: pos_frontend
+
+
+- name: set nginx sites-available
+  template: >
+    src=pos_frontend.nginx.conf
+    dest="/etc/nginx/sites-available/pos_frontend"
+    owner="www-data"
+  sudo: yes
+  notify: reload nginx
+  tags: pos_frontend
+
+
+- name: set nginx sites-enabled
+  file: >
+    src="/etc/nginx/sites-available/pos_frontend"
+    dest="/etc/nginx/sites-enabled/pos_frontend"
+    state=link
+  sudo: yes
+  notify: reload nginx
+  tags: pos_frontend
+
+
+- name: enable port 80 through firewall
+  ufw: port=80 proto=tcp rule=allow
+  tags: pos_frontend
+  sudo: yes
+
+- name: enable port 81 through firewall
+  ufw: port=81 proto=tcp rule=allow
+  tags: pos_frontend
+  sudo: yes
+
+
+- name: enable port 443 through firewall
+  ufw: port=443 proto=tcp rule=allow
+  tags: pos_frontend
+  sudo: yes
+  when: ssl_on

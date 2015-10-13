@@ -1,0 +1,15 @@
+---
+
+# Nginx settings.
+nginx_server_name: "{{api_domain}}"
+ssl_src_dir: ssl_self_signed
+ssl_dest_dir: /etc/ssl
+ssl_key_password: password
+
+nginx_http_port: 80
+nginx_api_port: 81
+nginx_https_port: 443
+nginx_access_log_file: "{{ application_log_dir }}/nginx_access.log"
+nginx_error_log_file: "{{ application_log_dir }}/nginx_error.log"
+nginx_static_dir: "{{ virtualenv_path }}/static/"
+nginx_media_dir: "{{ virtualenv_path }}/media/"

@@ -1,0 +1,39 @@
+---
+
+- name: Setup POS Plarform
+  hosts: pos-api
+  sudo: yes
+  sudo_user: root
+  remote_user: root
+  vars:
+    - server_base_domain: "pos-api.pos.co.ke"
+    - server_port: 8000
+    - api_domain: "{{server_base_domain}}"
+    - ssh_port: 22
+    - ssl_on: false
+    - update_apt_cache: yes
+  vars_files:
+    - env_vars/base.yml
+    - env_vars/db.yml
+    - env_vars/django.yml
+    - env_vars/gunicorn.yml
+    - env_vars/nginx.yml
+    - env_vars/ssl.yml
+  tags: ["pos-api"]
+  roles:
+    - {
+        role: base,
+        new_installation: false
+    }
+    - {
+        role: common,
+        new_installation: false
+    }
+    - db
+    - {
+        role: pos_api,
+        inklibs_version: "0.0.1a1",
+        server_name: "{{api_domain}}",
+        nginx_port: 80,
+        tags: ["pos_api"]
+    }

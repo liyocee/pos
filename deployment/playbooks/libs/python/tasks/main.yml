@@ -1,0 +1,28 @@
+---
+- name: Install python, python-dev, python-setuptools and virtualenv
+  apt: name={{ item }} state=present
+  sudo: yes
+  tags: python
+  with_items:
+    - python
+    - python-dev
+    - python-setuptools
+
+- name: Install pip
+  easy_install: name=pip
+  sudo: yes
+  tags: pip
+
+- name: update pip
+  pip: name=pip state=latest
+  sudo: yes
+  tags: pip
+
+- name: install virtualenv
+  pip: name=virtualenv state=latest
+  sudo: yes
+  tags: virtualenv
+
+- name: ensure $HOME/.pip exists
+  file: name=~/.pip state=directory owner={{ansible_ssh_user}}
+  tags: pip

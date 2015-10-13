@@ -1,0 +1,40 @@
+{% extends "libs/nginx/templates/nginx.default.site" %}
+
+{% block upstreams %}
+upstream inklibs_api {
+    server localhost:{{server_port}} fail_timeout=0;
+}
+{% endblock upstreams %}
+
+{% block http_locations %}
+
+    location /favicon.ico {
+        alias {{ nginx_static_dir }}/favicon.ico;
+    }
+    location / {
+        proxy_pass http://inklibs_api;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Proxy-Protocol $scheme;
+    }
+
+    location /static/ {
+        alias   {{ nginx_static_dir }};
+    }
+
+    location /media/ {
+        alias   {{ nginx_media_dir }};
+    }
+
+    # Error pages
+    error_page 500 502 504 /500.html;
+    location = /500.html {
+        root {{ project_path }}/{{ application_name }}/templates/;
+    }
+
+    error_page 503 /maintenance_on.html;
+    location = /maintenance_on.html {
+        root {{ virtualenv_path }}/;
+    }
+
+{% endblock http_locations %}

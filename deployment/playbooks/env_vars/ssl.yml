@@ -1,0 +1,13 @@
+---
+ssl_on: false
+ssl_dest_dir: /etc/ssl
+
+ssl_crt: |
+  -----BEGIN CERTIFICATE-----
+
+  -----END CERTIFICATE-----
+
+ssl_key: |
+  -----BEGIN PRIVATE KEY-----
+
+  -----END PRIVATE KEY-----

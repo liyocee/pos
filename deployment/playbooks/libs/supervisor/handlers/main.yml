@@ -1,0 +1,11 @@
+---
+- name: restart supervisor
+  sudo: yes
+  command: supervisorctl restart all
+  tags: supervisor
+
+
+- name: reread supervisor
+  sudo: yes
+  command: supervisorctl reread && supervisorctl update
+  tags: supervisor

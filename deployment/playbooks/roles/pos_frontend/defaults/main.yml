@@ -1,0 +1,10 @@
+---
+install_dir: "/opt/inklibs_frontend"
+download_dir: "{{install_dir}}/downloads"
+extraction_dir: "{{install_dir}}/frontend"
+healthix_frontend_version: "0.0.1a1"
+archive_base_dir: "bin"
+server_url: "http://localhost:8001/v1/"
+debug: "true"
+ssl_on: false
+server_name: localhost
