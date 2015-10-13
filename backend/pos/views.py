@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, permissions
 from .models import(
     Organization, SalesAgent, ProductTypes,
     Sales
@@ -15,6 +15,7 @@ class OrganizationView(generics.ListCreateAPIView):
     queryset = Organization.objects.all()
     serializer_class = OrganizationSerializer
     filter_class = OrganizationFilter
+    permission_classes = (permissions.AllowAny,)
 
 
 class OrganizationDetailView(generics.RetrieveUpdateDestroyAPIView):
