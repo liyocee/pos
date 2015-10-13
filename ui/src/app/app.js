@@ -18,7 +18,8 @@
         "pos.dashboard",
         "pos.common",
         "pos.sales",
-        "pos.auth"
+        "pos.auth",
+        "pos.products"
     ])
     .run(["editableOptions", function(editableOptions){
         editableOptions.theme = "bs3";

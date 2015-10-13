@@ -5,14 +5,19 @@
     ])
     .service("Pos.Sales.Service", ["Restangular", "Pos.Auth.AuthService",
     function(api, AuthService){
-        var baseApi = api.all("pos").all("prospect");
+        var baseApi = api.all("pos").all("sales");
         var userId = AuthService.getUser().id;
-        this.prospects = {
+        var organizationId = AuthService.getUser().organization.id;
+        this.sales = {
             create: function(data){
                 return baseApi.post(data);
             },
             list: function(filters){
-                return baseApi.customGET("", filters);
+                var query_param = {
+                    organization: organizationId
+                };
+                _.extend(query_param, filters);
+                return baseApi.customGET("", query_param);
             },
             get: function(prospectId){
                 return api.one("prospect", prospectId).get();

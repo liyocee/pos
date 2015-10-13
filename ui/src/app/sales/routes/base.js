@@ -29,8 +29,8 @@
                     url: "/list",
                     views: {
                         "content@base.sales": {
-                            templateUrl: "prospects/tpls/list.tpl.html",
-                            controller: "Pos.sales.List.Controller as vm"
+                            templateUrl: "sales/tpls/list.tpl.html",
+                            controller: "Pos.Sales.List.Controller as vm"
                         },
                         "content-search@base.sales": {
                             templateUrl: "common/tpls/content-search.tpl.html"

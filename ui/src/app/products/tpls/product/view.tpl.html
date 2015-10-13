@@ -1,0 +1,8 @@
+<table class="table" cg-busy="vm.promise">
+        <tr>
+          <td>Name: </td>
+          <td>
+              <a href="#" editable-text="vm.product.name"  onbeforesave="vm.updateProduct($data, 'name')">{{ vm.product.name|| 'empty' }}</a>
+          </td>
+        </tr>
+  </table>

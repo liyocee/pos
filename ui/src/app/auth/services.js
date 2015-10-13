@@ -33,6 +33,11 @@
             scope.login_promise = api.all("auth").all("login").post(data);
             scope.login_promise.then(
                 function(data){
+                    if(_.isEmpty(data.user.organization)){
+                        scope.alert = "Invalid username/password combination";
+                        notification.error("Error", "Error logging in");
+                        return;
+                    }
                     var credz = {
                         token: data.key,
                         user: data.user

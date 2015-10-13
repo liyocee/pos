@@ -8,7 +8,7 @@
             var vm = this;
             vm.service = {
                 name: SalesService,
-                key: "pos"
+                key: "sales"
             };
 
         }]

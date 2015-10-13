@@ -1,0 +1,5 @@
+<form novalidate cg-busy="vm.promise">
+    <formly-form model="vm.product" fields="vm.productFields" form="vm.productForm">
+      <button type="submit" class="btn  btn-primary"  ng-disabled="vm.productForm.$invalid" ng-click="vm.create(vm.product)">Add Product</button>
+    </formly-form>
+</form>

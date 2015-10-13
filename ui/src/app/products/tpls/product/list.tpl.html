@@ -1,0 +1,8 @@
+<table drf-grid="vm.service"  cg-busy="{{vm.service.key}}promise" ng-table="{{vm.service.key}}"
+    show-filter="true" class="table table-bordered table-striped">
+    <tr ng-repeat="term in $data">
+        <td title="'Name'" sortable="'name'"><a ui-sref="base.products.view({id: term.id})">{{term.name}}</a></td>
+        <td title="'Created On'" >{{term.created | dateFilter}}</td>
+    </tr>
+
+ </table>
