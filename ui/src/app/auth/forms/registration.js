@@ -9,7 +9,7 @@
                     model: options.profile.model,
                     type: "input",
                     templateOptions: {
-                        placeholder: "Compnay Name",
+                        placeholder: "Company Name",
                         label: "Company Name:",
                         type: "text",
                         required:true

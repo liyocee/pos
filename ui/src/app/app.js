@@ -19,7 +19,8 @@
         "pos.common",
         "pos.sales",
         "pos.auth",
-        "pos.products"
+        "pos.products",
+        "pos.agents"
     ])
     .run(["editableOptions", function(editableOptions){
         editableOptions.theme = "bs3";
