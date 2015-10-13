@@ -1,12 +1,14 @@
 <table drf-grid="vm.service"  cg-busy="{{vm.service.key}}promise" ng-table="{{vm.service.key}}"
     show-filter="true" class="table table-bordered table-striped">
     <tr ng-repeat="sale in $data">
-        <td title="'Surname'" sortable="'surname'">{{sale.surname}}</td>
-        <td title="'First Name'" sortable="'first_name'">{{sale.first_name}}</td>
-        <td title="'Phone Number'" sortable="'phone_number'">{{sale.phone_number}}</td>
-        <td title="'Email'" sortable="'email'">{{sale.email}}</td>
-        <td title="'Id Number'" sortable="'id_number'">{{sale.id_number}}</td>
-        <td title="'Location'" sortable="'location'">{{sale.location}}</td>
-        <td title="'Employment Status'" sortable="'employement_status'">{{sale.employment_status}}</td>
+        <td title="'Product'" sortable="'name'">{{sale.product_details.name}}</td>
+        <td title="'Agent'" sortable="'first_name'">{{sale.agent_details.profile.full_name}}</td>
+        <td title="'Customer Name'" sortable="'customer_first_name'">
+            {{(sale.customer_first_name+" "+ sale.customer_last_name)}}
+        </td>
+        <td title="'Email'" sortable="'customer_email'">{{sale.customer_email}}</td>
+        <td title="'Id Number'" sortable="'customer_id_number'">{{sale.customer_id_number}}</td>
+        <td title="'Follow Up Date'" sortable="'follow_up_date'">{{sale.follow_up_date | dateFilter}}</td>
+        <td title="'Created On'">{{sale.created | dateFilter}}</td>
     </tr>
  </table>
