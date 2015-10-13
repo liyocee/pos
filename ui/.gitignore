@@ -1,0 +1,13 @@
+node_modules/
+.elasticbeanstalk/
+.idea
+*.log
+node_modules/*
+vendor/*
+coverage/*
+build/*
+docs/*
+*~
+*.swp
+bin/
+dist/

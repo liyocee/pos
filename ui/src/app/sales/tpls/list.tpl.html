@@ -1,0 +1,12 @@
+<table drf-grid="vm.service"  cg-busy="{{vm.service.key}}promise" ng-table="{{vm.service.key}}"
+    show-filter="true" class="table table-bordered table-striped">
+    <tr ng-repeat="sale in $data">
+        <td title="'Surname'" sortable="'surname'">{{sale.surname}}</td>
+        <td title="'First Name'" sortable="'first_name'">{{sale.first_name}}</td>
+        <td title="'Phone Number'" sortable="'phone_number'">{{sale.phone_number}}</td>
+        <td title="'Email'" sortable="'email'">{{sale.email}}</td>
+        <td title="'Id Number'" sortable="'id_number'">{{sale.id_number}}</td>
+        <td title="'Location'" sortable="'location'">{{sale.location}}</td>
+        <td title="'Employment Status'" sortable="'employement_status'">{{sale.employment_status}}</td>
+    </tr>
+ </table>

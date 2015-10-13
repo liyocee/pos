@@ -1,0 +1,22 @@
+<table class="table" cg-busy="vm.promise">
+        <tr>
+          <td>Name: </td>
+          <td>
+              <a href="#" editable-text="vm.board.name" onbeforesave="vm.updateBoard($data, 'name')">{{ vm.board.name|| 'empty' }}</a>
+          </td>
+        </tr>
+        <tr>
+          <td>Description: </td>
+          <td>
+              <a href="#" editable-textarea="vm.board.description" onbeforesave="vm.updateBoard($data, 'description')">{{ vm.board.description || 'empty' }}</a>
+          </td>
+        </tr>
+        <tr>
+          <td>Parent Board: </td>
+          <td> <a ui-sref="base.boards.view({id: vm.board.parent_details.id})"> {{vm.board.parent_details.name}} </a></td>
+        </tr>
+        <tr>
+          <td>Tags </td>
+          <td><span ng-repeat="tag in vm.board.tags">{{(tag.name+ "|")}}</span></td>
+        </tr>
+  </table>

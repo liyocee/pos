@@ -1,0 +1,26 @@
+{
+    "node": true,
+    "esnext": true,
+    "curly": false,
+    "smarttabs": true,
+    "indent": 4,
+    "quotmark": true,
+    "globals": {
+        "jQuery": true,
+        "angular": true,
+        "beforeEach": true,
+        "afterEach": true,
+        "describe": true,
+        "expect": true,
+        "inject": true,
+        "it": true,
+        "browser": true,
+        "protractor": true,
+        "by": true,
+        "module":true,
+        "moment": true,
+        "_": true,
+        "spyOn":true,
+        "toastr": true
+    }
+}

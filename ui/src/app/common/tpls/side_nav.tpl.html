@@ -1,0 +1,39 @@
+ <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- search form -->
+          <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+              <input type="text" name="q" class="form-control" placeholder="Search..." />
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+          </form>
+          <!-- /.search form -->
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <ul class="sidebar-menu" ng-class="{active: $state.includes('base')}">
+            <li class="header">MAIN NAVIGATION</li>
+            <li  ui-sref-active="active">
+              <a ui-sref="base.dashboard">
+                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+              </a>
+            </li>
+
+            <li ng-class="{active:$state.includes('base.sales')}">
+                <a ui-sref="base.sales.list"><i class="fa fa-suitcase "></i> <span>Sales</span></a>
+            </li>
+
+            <li ng-class="{active:$state.includes('base.products')}">
+                <a ui-sref="base.products.list"><i class="fa fa-list "></i> <span>Products</span></a>
+            </li>
+
+            <li ng-class="{active:$state.includes('base.agents')}">
+                <a ui-sref="base.agents.list"><i class="fa fa-user "></i> <span>Sales Agents</span></a>
+            </li>
+
+          </ul>
+        </section>
+        <!-- /.sidebar -->
+      </aside>

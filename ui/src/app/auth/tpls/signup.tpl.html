@@ -1,0 +1,25 @@
+ <div ui-view="header"></div>
+ <div class="container form-container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                <div class="panel panel-default panel-more-shadow">
+                    <div class="panel-body">
+                        <div class="panel-desc">Sign up</div>
+                        <hr>
+                        <form novalidate cg-busy="vm.promise">
+                            <formly-form model="vm.user" fields="vm.userFields" form="vm.registrationForm">
+                              <button type="submit" class="btn btn-lg btn-primary btn-block"  ng-disabled="vm.registrationForm.$invalid" ng-click="vm.signup(vm.user)">Create account</button>
+                            </formly-form>
+                            <div class="form-group m-top15">
+                                <a ui-sref="login">Already signed up?</a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="panel-footer text-center">
+                        <p>&copy; POS</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
