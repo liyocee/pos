@@ -1,0 +1,9 @@
+<table drf-grid="vm.service"  cg-busy="{{vm.service.key}}promise" ng-table="{{vm.service.key}}"
+    show-filter="true" class="table table-bordered table-striped">
+    <tr ng-repeat="agent in $data">
+        <td title="'Name'" sortable="'first_name'"><a ui-sref="base.agents.view({id: agent.id})">{{(agent.profile.first_name+"  " +agent.profile.last_name)}}</a></td>
+        <td title="'Email'" >{{agent.profile.email }}</td>
+        <td title="'Created On'" >{{agent.profile.date_joined | dateFilter}}</td>
+    </tr>
+
+ </table>

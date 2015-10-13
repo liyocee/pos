@@ -1,0 +1,22 @@
+<table class="table" cg-busy="vm.promise">
+        <tr>
+          <td>First Name: </td>
+          <td>
+              <a href="#" editable-text="vm.agent.profile.first_name"  onbeforesave="vm.updateAgent($data, 'first_name')">{{ vm.agent.profile.first_name|| 'empty' }}</a>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Last Name: </td>
+          <td>
+              <a href="#" editable-text="vm.agent.profile.last_name"  onbeforesave="vm.updateAgent($data, 'last_name')">{{ vm.agent.profile.last_name|| 'empty' }}</a>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Email: </td>
+          <td>
+              <a href="#" editable-text="vm.agent.profile.email"  onbeforesave="vm.updateAgent($data, 'email')">{{ vm.agent.profile.email|| 'empty' }}</a>
+          </td>
+        </tr>
+  </table>
