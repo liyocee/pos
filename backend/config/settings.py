@@ -87,7 +87,8 @@ CORS_ORIGIN_WHITELIST = (
     'localhost:8012',
     '.healthix.co.ke',
     'pos-web.healthix.co.ke',
-    'pos-api.healthix.co.ke'
+    'pos-api.healthix.co.ke',
+    '52.89.181.225'
 )
 API_DOMAIN = 'pos-api.healthix.co.ke'
 CORS_ALLOW_CREDENTIALS = True
