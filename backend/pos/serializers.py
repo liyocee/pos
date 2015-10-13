@@ -58,6 +58,10 @@ class ProductTypesSerializer(serializers.ModelSerializer):
 
 
 class SalesSerializer(serializers.ModelSerializer):
+    agent_details = SalesAgentSerializer(
+        source="agent", read_only=True)
+    product_details = ProductTypesSerializer(
+        source="product", read_only=True)
 
     class Meta:
         model = Sales
