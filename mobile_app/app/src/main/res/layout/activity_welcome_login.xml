@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_nairobi"
+    android:padding="15dp">
+
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:src="@drawable/circle_logo"/>
+
+    <TextView
+        android:id="@+id/welcomeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_title"
+        android:layout_gravity="center_vertical|center"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="30dp"/>
+
+    <TextView
+        android:id="@+id/welcomeText"
+        android:layout_width=
+            "wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_text"
+        android:layout_gravity="center_vertical|center"
+        android:textColor="@color/black"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:gravity="center" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/rounded_corner_btn"
+        android:textColor="@color/white"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/login" />
+</LinearLayout>
