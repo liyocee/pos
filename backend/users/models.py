@@ -87,5 +87,19 @@ class User(AbstractBaseUser):
                 details = {}
         return details
 
+    @property
+    def get_agent(self):
+        from pos.models import SalesAgent
+        try:
+            agent = SalesAgent.objects.get(profile=self)
+            details = {
+                "id": agent.organization.id,
+                "is_creator": False
+            }
+        except SalesAgent.DoesNotExist:
+            details = {}
+
+        return details
+
     class Meta:
         app_label = 'users'

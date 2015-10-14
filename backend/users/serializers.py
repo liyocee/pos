@@ -15,6 +15,8 @@ class UserSerializer(serializers.ModelSerializer):
     requires_password_change = serializers.ReadOnlyField()
     organization = serializers.DictField(
         read_only=True, source="get_organization")
+    agent = serializers.DictField(
+        read_only=True, source="get_agent")
 
     class Meta(object):
         model = User
