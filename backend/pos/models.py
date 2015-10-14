@@ -51,7 +51,7 @@ class Sales(AbstractBase):
         null=False, blank=False, max_length=128)
     customer_address = models.TextField(
         null=True, blank=True)
-    follow_up_date = models.DateTimeField(null=False, blank=False)
+    follow_up_date = models.DateTimeField(null=True, blank=True)
     agent = models.ForeignKey(SalesAgent)
 
     class Meta:

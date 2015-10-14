@@ -93,7 +93,7 @@ class User(AbstractBaseUser):
         try:
             agent = SalesAgent.objects.get(profile=self)
             details = {
-                "id": agent.organization.id,
+                "id": agent.id,
                 "is_creator": False
             }
         except SalesAgent.DoesNotExist:
