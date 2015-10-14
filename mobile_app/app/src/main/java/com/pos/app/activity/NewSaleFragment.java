@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import com.pos.app.Constants;
 import com.pos.app.R;
 import com.pos.app.pojos.Product;
 import com.pos.app.utils.Command;
+import com.pos.app.utils.CreateSaleAsync;
 import com.pos.app.utils.GPSManager;
 import com.pos.app.utils.HttpAsync;
 
@@ -67,16 +69,8 @@ public class NewSaleFragment extends Fragment implements Command {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_new_sale, container, false);
-//        TextView textView = (TextView) rootView.findViewById(R.id.product);
-//        textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+        final View rootView = inflater.inflate(R.layout.fragment_new_sale, container, false);
         Button btn = (Button) rootView.findViewById(R.id.saveSaleButton);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e("Clicked", "about to save");
-            }
-        });
         TextView textLatitude = (TextView)rootView.findViewById(R.id.latitude);
         TextView textLongitude = (TextView)rootView.findViewById(R.id.longitude);
         if(gpsTracker.canGetLocation()){
@@ -90,6 +84,51 @@ public class NewSaleFragment extends Fragment implements Command {
             textLongitude.setText("");
         }
         this.view = rootView;
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView latitudeField = (TextView) rootView.findViewById(R.id.latitude);
+                String mLatitude = latitudeField.getText().toString();
+                TextView longitudeField = (TextView) rootView.findViewById(R.id.longitude);
+                String mLongitude = longitudeField.getText().toString();
+                TextView emailField = (TextView) rootView.findViewById(R.id.customerEmail);
+                String mEmail = emailField.getText().toString();
+                TextView phoneField = (TextView) rootView.findViewById(R.id.customerPhone);
+                String mPhone = phoneField.getText().toString();
+                TextView idNumberField = (TextView) rootView.findViewById(R.id.customerPhone);
+                String mIdNumber = idNumberField.getText().toString();
+                TextView firstNameField = (TextView)rootView.findViewById(R.id.customerFirstName);
+                String mFirstName = firstNameField.getText().toString();
+                TextView lastNameField = (TextView)rootView.findViewById(R.id.customerLastName);
+                String mLastName = lastNameField.getText().toString();
+                TextView productField = (TextView)rootView.findViewById(R.id.product_id);
+                String mProductId = productField.getText().toString();
+                String mFollowUpDate = "2015-10-16T10:04:00";
+                String mAgent = mPreferences.getString("agent_id", "");
+
+                try{
+                    JSONObject prod = new JSONObject();
+                    prod.put("latitude", mLatitude);
+                    prod.put("longitude", mLongitude);
+                    prod.put("product", mProductId);
+                    prod.put("agent", mAgent);
+                    prod.put("customer_email", mEmail);
+                    prod.put("customer_phone", mPhone);
+                    prod.put("customer_first_name", mFirstName);
+                    prod.put("customer_last_name", mLastName);
+                    prod.put("customer_id_number", mIdNumber);
+                    prod.put("follow_up_date", mFollowUpDate);
+
+                    Log.e("CREATE_PROD", prod.toString());
+                    CreateSaleAsync saleAsync = new CreateSaleAsync(context, mPreferences, rootView);
+                    new HttpAsync(context, saleAsync, Constants.SALES_URL, "POST", prod).execute();
+                }catch(JSONException e){
+                    e.printStackTrace();
+                }
+
+            }
+        });
         return rootView;
     }
 
