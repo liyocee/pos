@@ -152,8 +152,6 @@ public class NewSaleFragment extends Fragment implements Command {
                 products.add(product);
                 // populate product names
                 productsList.add(prod.getString("name"));
-
-                Log.e("PRODUCT", productsList.toString());
             }
             Spinner mySpinner = (Spinner) view.findViewById(R.id.product);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(
