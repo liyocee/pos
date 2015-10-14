@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.pos.app.Constants;
 import com.pos.app.R;
 import com.pos.app.utils.Command;
 import com.pos.app.utils.HttpAsync;
@@ -37,7 +39,7 @@ public class LoginActivity extends AppCompatActivity implements Command {
             myParams.put("username", mUserName);
             myParams.put("password", mUserPassword);
             Log.d("Register User Params", myParams.toString() + "");
-            new HttpAsync(context, this, myParams).execute();
+            new HttpAsync(context, this, Constants.LOGIN_URL, myParams).execute();
         }catch(JSONException e){
             e.printStackTrace();
         }

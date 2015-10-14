@@ -2,9 +2,6 @@ package com.pos.app.utils;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
-
-import com.pos.app.Constants;
 import android.content.Context;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -26,14 +23,16 @@ public class HttpAsync extends AsyncTask<String, String, Void> {
     JSONObject jObj = null;
     JSONObject myParams = null;
     String json = "";
+    String url = "";
     ProgressDialog progress = null;
     int statusCode;
     protected Context context = null;
     protected Command command = null;
-    public HttpAsync(Context currentContext,Command command, JSONObject params){
+    public HttpAsync(Context currentContext,Command command, String url, JSONObject params){
         this.context = currentContext;
         this.myParams = params;
         this.command = command;
+        this.url = url;
     }
 
     @Override
@@ -49,12 +48,11 @@ public class HttpAsync extends AsyncTask<String, String, Void> {
         try {
             // defaultHttpClient
             HttpClient httpClient = new DefaultHttpClient();
-            HttpPost httpPost = new HttpPost(Constants.LOGIN_URL);
+            HttpPost httpPost = new HttpPost(this.url);
             StringEntity stringEntity = new StringEntity(myParams.toString());
             stringEntity.setContentEncoding("UTF-8");
             stringEntity.setContentType("application/json");
             httpPost.setEntity(stringEntity);
-            //httpPost.setEntity(new UrlEncodedFormEntity(myParams));
             httpPost.setHeader("Accept", "application/json");
             httpPost.setHeader("Content-Type", "application/json");
 
@@ -108,8 +106,7 @@ public class HttpAsync extends AsyncTask<String, String, Void> {
             progress.dismiss();
 
         } catch (Exception e) {
-            Toast.makeText(this.context, e.getMessage(), Toast.LENGTH_LONG)
-                    .show();
+            e.printStackTrace();
         } finally {
             super.onPostExecute(aVoid);
         }
