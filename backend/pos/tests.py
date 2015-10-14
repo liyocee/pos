@@ -256,7 +256,8 @@ class TestSalesViews(LoginMixin, APITestCase):
             "customer_phone": "0715441321",
             "customer_first_name": "Brian",
             "customer_last_name": "Leon",
-            "follow_up_date": "2015-09-09T00:00:00"
+            "follow_up_date": "2015-09-09T00:00:00",
+            "agent": mommy.make(SalesAgent).id
         }
         url = reverse('api:v1:pos:sales')
         response = self.client.post(url, data)
