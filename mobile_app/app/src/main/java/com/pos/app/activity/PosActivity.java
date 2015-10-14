@@ -3,6 +3,7 @@ package com.pos.app.activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -26,6 +27,7 @@ import org.json.JSONObject;
 public class PosActivity extends AppCompatActivity implements Command{
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
+    private SharedPreferences mPreferences;
 
     private ViewPager mViewPager;
     private Context context;
@@ -35,6 +37,7 @@ public class PosActivity extends AppCompatActivity implements Command{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pos);
         context = this;
+        mPreferences = getSharedPreferences(Constants.USER_DATA, MODE_PRIVATE);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
@@ -79,16 +82,14 @@ public class PosActivity extends AppCompatActivity implements Command{
     }
 
     public void handleHttpSuccess(JSONObject jObj){
-//        SharedPreferences.Editor editor = mPreferences.edit();
+        SharedPreferences.Editor editor = mPreferences.edit();
         try{
-//            editor.putString("token", jObj.getString("key"));
-//            JSONObject user = jObj.getJSONObject("user");
-//            JSONObject org = user.getJSONObject("organization");
-//            JSONObject agent = user.getJSONObject("agent");
-//            editor.putString("organization", org.getString("id"));
-//            editor.putString("agent_id", agent.getString("id"));
-//            editor.putString("agent_name", user.getString("full_name"));
-//            editor.commit();
+
+            editor.remove("token");
+            editor.remove("organization");
+            editor.remove("agent_id");
+            editor.remove("agent_name");
+            editor.commit();
             Toast.makeText(context, "Successfully signed out",
                     Toast.LENGTH_LONG).show();
             Intent intent = new Intent(context, WelcomeActivity.class);

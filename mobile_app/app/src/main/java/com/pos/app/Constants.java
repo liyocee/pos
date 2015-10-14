@@ -6,6 +6,7 @@ public class Constants {
     public static final String LOGIN_URL = SERVER_BASE_URL+"auth/login/";
     public static final String LOGOUT_URL = SERVER_BASE_URL+"auth/logout/";
     public static final String SALES_URL = SERVER_BASE_URL+"pos/sales/";
+    public static final String USER_DATA = "CurrentUser";
     private Constants() {
     }
 

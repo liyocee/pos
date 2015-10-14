@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity implements Command {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         context = this;
-        mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
+        mPreferences = getSharedPreferences(Constants.USER_DATA, MODE_PRIVATE);
     }
 
     public void userLogin(View button) {
