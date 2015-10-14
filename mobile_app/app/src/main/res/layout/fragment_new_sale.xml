@@ -14,15 +14,22 @@
             android:padding="15dp">
 
             <EditText
+                android:id="@+id/product_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Product Id"
+                android:inputType="textMultiLine"
+                android:visibility="gone">
+            </EditText>
+
+            <Spinner
                 android:id="@+id/product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/product"
-                android:inputType="textMultiLine">
-
-                <requestFocus />
-            </EditText>
+                android:focusable="true" />
 
             <EditText
                 android:id="@+id/customerEmail"
@@ -77,16 +84,6 @@
                 android:inputType="textMultiLine">
             </EditText>
 
-
-            <EditText
-                android:id="@+id/followUpDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="7"
-                android:ems="10"
-                android:hint="@string/follow_up_date"
-                android:inputType="textMultiLine">
-            </EditText>
             <EditText
                 android:id="@+id/latitude"
                 android:layout_width="match_parent"

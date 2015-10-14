@@ -9,4 +9,6 @@ public interface Command {
     void handleHttpError();
 
     void handleHttpSuccess(JSONObject jObj);
+
+    String getAuthToken();
 }

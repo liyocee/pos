@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity implements Command {
             myParams.put("username", mUserName);
             myParams.put("password", mUserPassword);
             Log.d("Register User Params", myParams.toString() + "");
-            new HttpAsync(context, this, Constants.LOGIN_URL, myParams).execute();
+            new HttpAsync(context, this, Constants.LOGIN_URL, "POST", myParams).execute();
         }catch(JSONException e){
             e.printStackTrace();
         }
@@ -75,6 +75,10 @@ public class LoginActivity extends AppCompatActivity implements Command {
             e.printStackTrace();
         }
 
+    }
+
+    public String getAuthToken(){
+        return "";
     }
 
 

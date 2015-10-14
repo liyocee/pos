@@ -9,9 +9,11 @@ public class SalesListFragment extends ListFragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
     private  String mParam1;
+    private static int MODE_PRIVATE;
 
-    public static SalesListFragment newInstance(int sectionNumber ) {
+    public static SalesListFragment newInstance(int sectionNumber, int preferenceMode) {
         SalesListFragment fragment = new SalesListFragment();
+        MODE_PRIVATE = preferenceMode;
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);

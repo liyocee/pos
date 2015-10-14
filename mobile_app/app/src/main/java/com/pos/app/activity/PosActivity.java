@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.pos.app.Constants;
 import com.pos.app.R;
 import com.pos.app.utils.Command;
+import com.pos.app.utils.GPSManager;
 import com.pos.app.utils.HttpAsync;
 import org.json.JSONObject;
 
@@ -65,7 +66,7 @@ public class PosActivity extends AppCompatActivity implements Command{
         int id = item.getItemId();
         JSONObject myParams = new JSONObject();
         if (id == R.id.logout) {
-            new HttpAsync(context, this, Constants.LOGOUT_URL, myParams).execute();
+            new HttpAsync(context, this, Constants.LOGOUT_URL, "POST", myParams).execute();
             return true;
         }
 
@@ -100,6 +101,9 @@ public class PosActivity extends AppCompatActivity implements Command{
 
 
     }
+    public String getAuthToken(){
+        return mPreferences.getString("token", "");
+    }
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -111,10 +115,10 @@ public class PosActivity extends AppCompatActivity implements Command{
             Fragment frag = null;
             switch(position){
                 case 0:
-                    frag = NewSaleFragment.newInstance(position + 1);
+                    frag = NewSaleFragment.newInstance(position + 1, MODE_PRIVATE);
                     break;
                 case 1:
-                    frag = SalesListFragment.newInstance(position + 1);
+                    frag = SalesListFragment.newInstance(position + 1, MODE_PRIVATE);
                     break;
             }
             return frag;

@@ -9,6 +9,7 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
@@ -18,27 +19,30 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.CoderMalfunctionError;
 
 public class HttpAsync extends AsyncTask<String, String, Void> {
     JSONObject jObj = null;
     JSONObject myParams = null;
     String json = "";
     String url = "";
+    String method = "";
     ProgressDialog progress = null;
     int statusCode;
     protected Context context = null;
     protected Command command = null;
-    public HttpAsync(Context currentContext,Command command, String url, JSONObject params){
+    public HttpAsync(Context currentContext,Command command, String url, String method, JSONObject params){
         this.context = currentContext;
         this.myParams = params;
         this.command = command;
         this.url = url;
+        this.method = method;
     }
 
     @Override
     protected void onPreExecute() {
-        command.doPreExecute();
         super.onPreExecute();
+        progress = command.doPreExecute();
     }
 
     @Override
@@ -48,15 +52,32 @@ public class HttpAsync extends AsyncTask<String, String, Void> {
         try {
             // defaultHttpClient
             HttpClient httpClient = new DefaultHttpClient();
-            HttpPost httpPost = new HttpPost(this.url);
-            StringEntity stringEntity = new StringEntity(myParams.toString());
-            stringEntity.setContentEncoding("UTF-8");
-            stringEntity.setContentType("application/json");
-            httpPost.setEntity(stringEntity);
-            httpPost.setHeader("Accept", "application/json");
-            httpPost.setHeader("Content-Type", "application/json");
+            HttpResponse httpResponse = null;
 
-            HttpResponse httpResponse = httpClient.execute(httpPost);
+            if(this.method == "POST"){
+                HttpPost httpObj = new HttpPost(this.url);
+                StringEntity stringEntity = new StringEntity(myParams.toString());
+                httpObj.setEntity(stringEntity);
+                stringEntity.setContentEncoding("UTF-8");
+                stringEntity.setContentType("application/json");
+                httpObj.setHeader("Accept", "application/json");
+                httpObj.setHeader("Content-Type", "application/json");
+                if(command.getAuthToken()!=""){
+                    httpObj.setHeader("Authorization", "Token "+command.getAuthToken());
+                }
+                httpResponse = httpClient.execute(httpObj);
+
+            }else{
+                //default to GET
+                HttpGet httpObj = new HttpGet(this.url);
+                httpObj.setHeader("Accept", "application/json");
+                httpObj.setHeader("Content-Type", "application/json");
+                if(command.getAuthToken()!=""){
+                    httpObj.setHeader("Authorization", "Token "+command.getAuthToken());
+                }
+                httpResponse = httpClient.execute(httpObj);
+            }
+
             HttpEntity httpEntity = httpResponse.getEntity();
             mis = httpEntity.getContent();
             StatusLine statusLine = httpResponse.getStatusLine();
@@ -96,6 +117,7 @@ public class HttpAsync extends AsyncTask<String, String, Void> {
 
     @Override
     protected void onPostExecute(Void aVoid) {
+        progress.dismiss();
         Log.e("JSONObject", "" + String.valueOf(json));
         try {
             if(statusCode >= 400){
@@ -103,7 +125,6 @@ public class HttpAsync extends AsyncTask<String, String, Void> {
             }else {
                 command.handleHttpSuccess(jObj);
             }
-            progress.dismiss();
 
         } catch (Exception e) {
             e.printStackTrace();
