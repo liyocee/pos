@@ -46,7 +46,8 @@ class ReportsView(APIView):
             "products": [
             ],
             "agents": [
-            ]
+            ],
+            "markers": {}
         }
         organization = request.query_params['organization']
         products = ProductTypes.objects.filter(
@@ -66,5 +67,16 @@ class ReportsView(APIView):
                     "count": Sales.objects.filter(agent=agent).count()
                 }
             )
+        all_sales = Sales.objects.all()
 
+        for index, sale in enumerate(all_sales):
+            if sale.latitude and sale.longitude:
+                marker = {
+                    ""+"marker"+str(index): {
+                        "lat": sale.latitude,
+                        "lng": sale.longitude,
+                        "message": sale.product.name
+                    }
+                }
+                report["markers"].update(marker)
         return Response(report)
