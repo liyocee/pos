@@ -6,7 +6,7 @@ import rest_framework_swagger as rfs
 import json
 from django.utils.safestring import mark_safe
 from django.shortcuts import render_to_response, RequestContext
-from pos.models import Sales
+from pos.models import Sales, ProductTypes, SalesAgent
 
 
 def permission_denied_handler(request):
@@ -56,20 +56,20 @@ class ReportsView(APIView):
                 }
             ]
         }
-        sales = Sales.objects.distinct("product")
-        agent_sales = Sales.objects.distinct("agent")
-        for sale in sales:
+        products = ProductTypes.objects.distinct("name")
+        agents = SalesAgent.objects.all()
+        for product in products:
             report["products"].append(
                 {
-                    "name": sale.product.name,
-                    "count": sales.filter(product=sale.product).count()
+                    "name": product.name,
+                    "count": Sales.objects.filter(product=product).count()
                 }
             )
-        for item in agent_sales:
+        for agent in agents:
             report["agents"].append(
                 {
-                    "name": item.agent.profile.get_full_name(),
-                    "count": sales.filter(agent=item.agent).count()
+                    "name": agent.profile.get_full_name(),
+                    "count": Sales.objects.filter(agent=agent).count()
                 }
             )
 
