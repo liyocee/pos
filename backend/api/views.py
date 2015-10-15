@@ -56,8 +56,10 @@ class ReportsView(APIView):
                 }
             ]
         }
-        products = ProductTypes.objects.distinct("name")
-        agents = SalesAgent.objects.all()
+        organization = request.query_params['organization']
+        products = ProductTypes.objects.filter(
+            organization=organization).distinct("name")
+        agents = SalesAgent.objects.filter(organization=organization)
         for product in products:
             report["products"].append(
                 {
