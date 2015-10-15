@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from .views import ReportsView
 
 v1_urls = patterns(
     '',
@@ -11,6 +12,8 @@ v1_urls = patterns(
     url(r'^auth/drf/', include(
         'rest_framework.urls', namespace='rest_framework')),
     url(r'^pos/', include('pos.urls', namespace='pos')),
+    url(r'^reports/', ReportsView.as_view(),
+        name="reports"),
 )
 
 

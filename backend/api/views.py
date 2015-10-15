@@ -1,9 +1,12 @@
 from django.http import HttpResponseRedirect
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from django.conf import settings
 import rest_framework_swagger as rfs
 import json
 from django.utils.safestring import mark_safe
 from django.shortcuts import render_to_response, RequestContext
+from pos.models import Sales
 
 
 def permission_denied_handler(request):
@@ -34,3 +37,40 @@ def get_full_base_path(request):
     else:
         protocol = 'https' if request.is_secure() else 'http'
         return '{0}://{1}'.format(protocol, base_path.rstrip('/'))
+
+
+class ReportsView(APIView):
+
+    def get(self, request, format=None):
+        report = {
+            "products": [
+            ],
+            "agents": [
+                {
+                    "name": "Njoroge",
+                    "count": 10
+                },
+                {
+                    "name": "Kimani",
+                    "count": 10
+                }
+            ]
+        }
+        sales = Sales.objects.distinct("product")
+        agent_sales = Sales.objects.distinct("agent")
+        for sale in sales:
+            report["products"].append(
+                {
+                    "name": sale.product.name,
+                    "count": sales.filter(product=sale.product).count()
+                }
+            )
+        for item in agent_sales:
+            report["agents"].append(
+                {
+                    "name": item.agent.profile.get_full_name(),
+                    "count": sales.filter(agent=item.agent).count()
+                }
+            )
+
+        return Response(report)

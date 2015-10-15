@@ -138,7 +138,7 @@ SWAGGER_SETTINGS = {
     ],
     'api_key': '228b67fadab69d86a8d7e49dc03ac8e2206yre22',
     'is_authenticated': True,
-    'is_superuser': True,
+    'is_superuser': False,
     'permission_denied_handler': 'api.views.permission_denied_handler',
     'resource_access_handler': None,
     'base_path': 'localhost:8000' if DEBUG else API_DOMAIN,
