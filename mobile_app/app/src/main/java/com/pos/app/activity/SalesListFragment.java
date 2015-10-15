@@ -27,8 +27,8 @@ public class SalesListFragment extends ListFragment implements Command {
     private static Context context = null;
     private static int MODE_PRIVATE;
     JSONArray salesArray;
-    ArrayList<String> salesList = new ArrayList<String>();
-    ArrayList<Sale> sales = new ArrayList<Sale>();
+    ArrayList<String> salesList = null;
+    ArrayList<Sale> sales = null;
     View view = null;
 
     public static SalesListFragment newInstance(int sectionNumber, int preferenceMode) {
@@ -37,7 +37,7 @@ public class SalesListFragment extends ListFragment implements Command {
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         MODE_PRIVATE = preferenceMode;
-        context = fragment.getContext();
+        Log.e("FRAG_LOG 1", "here");
         return fragment;
     }
     public SalesListFragment() {
@@ -48,12 +48,27 @@ public class SalesListFragment extends ListFragment implements Command {
         super.onCreate(savedInstanceState);
         context = this.getContext();
         mPreferences = context.getSharedPreferences(Constants.USER_DATA, SalesListFragment.MODE_PRIVATE);
+        fetchSales();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        fetchSales();
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        fetchSales();
+    }
+
+    private void fetchSales(){
         JSONObject myParams = new JSONObject();
         String url = Constants.SALES_URL+"?agent="+mPreferences.getString("agent_id", "");
         url = url+"&page_size=1000";
         new HttpAsync(context, this, url,"GET", myParams).execute();
     }
-
     public ProgressDialog doPreExecute(){
         return ProgressDialog.show(SalesListFragment.context, "Fetching Sales", "Please Wait...", true);
     }
@@ -63,6 +78,8 @@ public class SalesListFragment extends ListFragment implements Command {
     }
 
     public void handleHttpSuccess(JSONObject jObj){
+        salesList = new ArrayList<String>();
+        sales = new ArrayList<Sale>();
         try{
             salesArray = jObj.getJSONArray("results");
             Log.e("SALE_ARRAY", salesArray.toString());
@@ -81,7 +98,7 @@ public class SalesListFragment extends ListFragment implements Command {
                 sales.add(saleItem);
                 // populate sales names
                 String customerName = sale.getString("customer_first_name")+" "+sale.getString("customer_last_name");
-                salesList.add(prod.getString("name") + " , sold to  "+customerName);
+                salesList.add(prod.getString("name") + " , sold to  " + customerName);
             }
             Log.e("HAPA", salesList.toString());
             setListAdapter(new ArrayAdapter<String>(

@@ -32,12 +32,14 @@ public class PosActivity extends AppCompatActivity implements Command{
 
     private ViewPager mViewPager;
     private Context context;
+    public boolean fetchSales = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pos);
         context = this;
+        this.fetchSales = false;
         mPreferences = getSharedPreferences(Constants.USER_DATA, MODE_PRIVATE);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

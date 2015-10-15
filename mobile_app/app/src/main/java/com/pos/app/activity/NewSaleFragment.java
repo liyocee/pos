@@ -123,6 +123,7 @@ public class NewSaleFragment extends Fragment implements Command {
                     Log.e("CREATE_PROD", prod.toString());
                     CreateSaleAsync saleAsync = new CreateSaleAsync(context, mPreferences, rootView);
                     new HttpAsync(context, saleAsync, Constants.SALES_URL, "POST", prod).execute();
+
                 }catch(JSONException e){
                     e.printStackTrace();
                 }
