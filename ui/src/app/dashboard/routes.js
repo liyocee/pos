@@ -9,7 +9,8 @@
                     url: "/dashboard",
                     views: {
                         "content@base": {
-                            templateUrl: "dashboard/tpls/dashboard.tpl.html"
+                            templateUrl: "dashboard/tpls/dashboard.tpl.html",
+                            controller: "Pos.Dashboard.Controller"
                         }
                     },
                     data: {pageTitle: "Dashboard"},

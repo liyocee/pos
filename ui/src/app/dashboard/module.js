@@ -5,7 +5,9 @@
         "toastr",
         "ui.bootstrap",
         "ui.bootstrap.tpls",
-        "pos.dashboard.routes"
+        "pos.dashboard.routes",
+        "pos.dashboard.controllers",
+        "pos.dashboard.services"
     ]);
 
 })(angular);

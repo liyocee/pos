@@ -12,58 +12,55 @@
 <section class="content">
     <!-- Small boxes (Stat box) -->
     <div class="row">
-       <!-- Small boxes (Stat box) -->
-          <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-aqua">
-              <div class="inner">
-                <h3>3</h3>
-                <p>Sales Calls Today</p>
+          <div class="col-md-6">
+                <div class="box">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Sales By Products</h3>
+                      <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                      </div>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p class="text-center">
+                            <strong>Comparison of Sales by Products</strong>
+                          </p>
+                          <div class="chart">
+                            <!-- Sales Chart Canvas -->
+                            <ng-c3 chart-id="sales_chart" series="salesChart.series" options="salesChart.options"></ng-c3>
+
+                          </div><!-- /.chart-responsive -->
+                        </div><!-- /.col -->
+                      </div><!-- /.row -->
+                    </div><!-- ./box-body -->
+
+                  </div>
               </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
+
+              <div class="col-md-6">
+                <div class="box">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Sales By Agents</h3>
+                      <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                      </div>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p class="text-center">
+                            <strong>Comparison of by Sales Agents</strong>
+                          </p>
+                          <div class="chart">
+                            <!-- Sales Chart Canvas -->
+                             <ng-c3 chart-id="agents_chart" series="agentsChart.series" options="agentsChart.options"></ng-c3>
+                          </div><!-- /.chart-responsive -->
+                        </div><!-- /.col -->
+                      </div><!-- /.row -->
+                    </div><!-- ./box-body -->
+
+                  </div>
               </div>
-              <a ui-sref="base.prospects.list" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
-          </div><!-- ./col -->
-          <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-green">
-              <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
-                <p>Sales Calls Today</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-              </div>
-              <a ui-sref="base.prospects.list" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
-          </div><!-- ./col -->
-          <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-yellow">
-              <div class="inner">
-                <h3>44</h3>
-                <p>Sales Calls This Week</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a ui-sref="base.prospects.list" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
-          </div><!-- ./col -->
-          <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-red">
-              <div class="inner">
-                <h3>65</h3>
-                <p>Sales Calls Last Week</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-              <a ui-sref="base.prospects.list" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
-          </div><!-- ./col -->
     </div>
 </section>
