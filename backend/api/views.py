@@ -46,14 +46,6 @@ class ReportsView(APIView):
             "products": [
             ],
             "agents": [
-                {
-                    "name": "Njoroge",
-                    "count": 10
-                },
-                {
-                    "name": "Kimani",
-                    "count": 10
-                }
             ]
         }
         organization = request.query_params['organization']
