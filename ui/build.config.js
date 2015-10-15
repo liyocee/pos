@@ -90,6 +90,8 @@ module.exports = {
             "vendor/d3/d3.js",
             "vendor/c3/c3.js",
             "vendor/ng-c3/dist/ng-c3.js",
+            "vendor/leaflet/dist/leaflet.js",
+            "vendor/angular-leaflet-directive/dist/angular-leaflet-directive.js",
             "vendor/angular-xeditable/dist/js/xeditable.js",
             "vendor/admin-lte/plugins/sparkline/jquery.sparkline.js",
             "vendor/admin-lte/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js",
