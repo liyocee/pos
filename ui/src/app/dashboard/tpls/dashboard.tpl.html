@@ -50,11 +50,38 @@
                       <div class="row">
                         <div class="col-md-12">
                           <p class="text-center">
-                            <strong>Comparison of by Sales Agents</strong>
+                            <strong>Comparison of Sales by Sales Agents</strong>
                           </p>
                           <div class="chart">
                             <!-- Sales Chart Canvas -->
                              <ng-c3 chart-id="agents_chart" series="agentsChart.series" options="agentsChart.options"></ng-c3>
+                          </div><!-- /.chart-responsive -->
+                        </div><!-- /.col -->
+                      </div><!-- /.row -->
+                    </div><!-- ./box-body -->
+
+                  </div>
+              </div>
+    </div>
+
+     <div class="row">
+          <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Product Sales Points on the Map</h3>
+                      <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                      </div>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p class="text-center">
+                            <strong>Distribution of Product Sales Points on the map</strong>
+                          </p>
+                          <div class="chart">
+                          <leaflet center="nairobi" markers="markers" height="480px" width="100%"></leaflet>
+
                           </div><!-- /.chart-responsive -->
                         </div><!-- /.col -->
                       </div><!-- /.row -->
