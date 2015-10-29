@@ -141,7 +141,7 @@ SWAGGER_SETTINGS = {
     'is_superuser': False,
     'permission_denied_handler': 'api.views.permission_denied_handler',
     'resource_access_handler': None,
-    'base_path': 'localhost:8000' if DEBUG else API_DOMAIN,
+    'base_path': API_DOMAIN,
     'info': {
         'contact': 'developers@emanager.co',
         'description': 'Explore the POS v0.0.1 API',
